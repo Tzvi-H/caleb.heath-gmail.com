@@ -10,6 +10,21 @@ const getBoards = (req, res, next) => {
   });
 };
 
+const getBoard = (req, res, next) => {
+  const id = req.params.id 
+  console.log(id)
+  Board.findById(id).then(board => {
+    res.json({
+      board
+    })
+  }).catch(e => {
+    res.json({
+      error: 'Invalid board id'
+    })
+  } 
+  )
+}
+
 const createBoard = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -28,4 +43,5 @@ const createBoard = (req, res, next) => {
 };
 
 exports.getBoards = getBoards;
+exports.getBoard = getBoard;
 exports.createBoard = createBoard;
