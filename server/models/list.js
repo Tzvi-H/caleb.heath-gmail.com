@@ -36,4 +36,4 @@ module.exports = List;
   "position": 65535.0
 }
 
-*?
+*/

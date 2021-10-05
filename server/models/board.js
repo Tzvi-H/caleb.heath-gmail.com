@@ -12,9 +12,11 @@ const BoardSchema = new Schema({
       ref: 'List'
     }
   ],
-  createdAt: Date,
-  updatedAt: Date
-})
+  
+  // createdAt: Date,
+  // updatedAt: Date
+
+}, {timestamps: true})
 
 const Board = mongoose.model('Board', BoardSchema);
 
