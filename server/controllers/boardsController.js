@@ -1,5 +1,6 @@
 const Board = require("../models/board");
-const List = require("../models/list")
+const List = require("../models/list");
+const Card = require("../models/card");
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
 
@@ -11,10 +12,19 @@ const getBoards = (req, res, next) => {
   });
 };
 
+// populate({
+//   path: 'friends',
+//   // Get friends of friends - populate the 'friends' array for every friend
+//   populate: { path: 'friends' }
+// });
+
 const getBoard = (req, res, next) => {
   const id = req.params.id 
   console.log(id)
-  Board.findById(id).populate('lists').then(board => {
+  Board.findById(id).populate({
+      path:'lists',
+      populate: {path: 'cards' }
+    }).then(board => {
     res.json({
       board
     })
