@@ -1,4 +1,5 @@
 const Board = require("../models/board");
+const List = require("../models/list")
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
 
@@ -13,11 +14,12 @@ const getBoards = (req, res, next) => {
 const getBoard = (req, res, next) => {
   const id = req.params.id 
   console.log(id)
-  Board.findById(id).then(board => {
+  Board.findById(id).populate('lists').then(board => {
     res.json({
       board
     })
   }).catch(e => {
+    console.log(e)
     res.json({
       error: 'Invalid board id'
     })
