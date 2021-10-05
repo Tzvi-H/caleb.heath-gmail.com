@@ -12,7 +12,13 @@ const ListSchema = new Schema({
   },
   createdAt: Date,
   updatedAt: Date,
-  position: Number
+  position: Number,
+  cards: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Card'
+    }
+  ]
 })
 
 const List = mongoose.model('List', ListSchema);
