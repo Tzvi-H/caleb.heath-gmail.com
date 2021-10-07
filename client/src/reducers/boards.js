@@ -10,9 +10,11 @@ export default function boards(state = [], action) {
       return state.concat(newBoard);
     }
     case types.FETCH_BOARD_SUCCESS: {
+      const filteredState = state.filter(b => b._id !== action.board._id)
       const {lists, ...boardWithoutLists} = action.board
-      console.log(boardWithoutLists)
-      return boardWithoutLists
+      return filteredState.concat(boardWithoutLists)
+      // this also *appears* to work
+      // return [boardWithoutLists]
     }
     default:
       return state;

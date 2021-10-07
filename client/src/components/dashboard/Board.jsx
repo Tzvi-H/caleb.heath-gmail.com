@@ -3,28 +3,14 @@ import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../actions/BoardActions";
 
+import ExistingLists from "./ExistingLists";
 import List from "./List"
 
 const Board = props => {
   const dispatch = useDispatch();
   const id = useParams().id
 
-  const lists = useSelector(store => store.lists)
-
-  // const cards = useSelector(store => store.cards)
-  // console.log(cards)
-  
-  /*
-  That allows us to create an `ExistingLists` component where we can query 
-  the store for the lists belonging to a particular board.
-  */
-
-  // const lists = useSelector((state) => state.lists);
-
-  // const listWrapper = lists.map((list) => {
-  //   return <div>{list}</div>
-  //   //return <BoardTile key={board._id} title={board.title} id={board._id} />;
-  // });
+  const board = useSelector(store => store.boards).filter(({_id}) => _id === id)[0]
 
   useEffect(() => {
     dispatch(actions.fetchBoard(id));
@@ -34,7 +20,7 @@ const Board = props => {
     <>
       <header>
         <ul>
-          <li id="title">My Title</li>
+          <li id="title">{board ? board.title : ""} </li>
           <li className="star-icon icon"></li>
           <li className="private private-icon icon">Private</li>
         </ul>
@@ -47,15 +33,7 @@ const Board = props => {
       </header>
       <main>
         <div id="list-container" className="list-container">
-          <div id="existing-lists" className="existing-lists">
-            {
-              lists.map(list => <List 
-                key={list._id} 
-                id={list._id}
-                title={list.title}
-              />)
-            }
-          </div>
+          <ExistingLists boardId={id} />
         </div>
       </main>
     </>
