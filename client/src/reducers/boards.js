@@ -11,6 +11,7 @@ export default function boards(state = [], action) {
     }
     case types.FETCH_BOARD_SUCCESS: {
       const {lists, ...boardWithoutLists} = action.board
+      console.log(boardWithoutLists)
       return boardWithoutLists
     }
     default:

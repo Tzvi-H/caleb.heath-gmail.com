@@ -10,10 +10,9 @@ const Board = props => {
   const id = useParams().id
 
   const lists = useSelector(store => store.lists)
-  console.log(lists);
 
-  const cards = useSelector(store => store.cards)
-  console.log(cards)
+  // const cards = useSelector(store => store.cards)
+  // console.log(cards)
   
   /*
   That allows us to create an `ExistingLists` component where we can query 
@@ -50,7 +49,11 @@ const Board = props => {
         <div id="list-container" className="list-container">
           <div id="existing-lists" className="existing-lists">
             {
-              lists.map(list => <List />)
+              lists.map(list => <List 
+                key={list._id} 
+                id={list._id}
+                title={list.title}
+              />)
             }
           </div>
         </div>
