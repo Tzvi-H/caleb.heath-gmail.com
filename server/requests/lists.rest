@@ -8,3 +8,13 @@ content-type: application/json
     "title": "My list 2"
   }
 }
+
+### Updates a list
+PUT http://localhost:5000/api/lists/1 HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Updated title",
+  "position": 137882
+}
+

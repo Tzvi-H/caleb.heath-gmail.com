@@ -59,7 +59,17 @@ const createList = (req, res, next) => {
   }
 };
 
+const updateList = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    res.json({msg: "success"})
+  } else {
+    res.json({msg: "failed validation"})
+  }
+}
+
 exports.createList = createList;
 
 exports.sendList = sendList;
 exports.addListToBoard = addListToBoard;
+exports.updateList = updateList
