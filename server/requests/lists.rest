@@ -5,6 +5,6 @@ content-type: application/json
 {
   "boardId": "615b2c8b16da3c988bc0ab1f",
   "list": {
-    "title": "My list"
+    "title": "My list 2"
   }
 }

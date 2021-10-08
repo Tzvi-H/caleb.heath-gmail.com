@@ -7,13 +7,13 @@ const CommentSchema = new Schema({
     required: [true, 'Comment requires text.'],
     minLength: 1
   },
-  createdAt: Date,
-  updatedAt: Date,
+  // createdAt: Date,
+  // updatedAt: Date,
   cardId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Card'
   }
-})
+}, {timestamps:true})
 
 const Comment = mongoose.model('Comment', CommentSchema);
 

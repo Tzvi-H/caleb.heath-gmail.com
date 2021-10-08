@@ -17,8 +17,8 @@ const CardSchema = new Schema({
   description: String,
   position: Number,
   archived: Boolean,
-  createdAt: Date,
-  updatedAt: Date,
+  // createdAt: Date,
+  // updatedAt: Date,
   dueDate: Date,
   completed: Boolean,
   commentsCount: Number,
@@ -39,7 +39,7 @@ const CardSchema = new Schema({
       ref: 'Action'
     }
   ],
-})
+}, {timestamps: true})
 
 const Card = mongoose.model('Card', CardSchema);
 

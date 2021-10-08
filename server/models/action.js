@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 
 const ActionSchema = new Schema({
   description: String,
-  createdAt: Date,
-  updatedAt: Date,
+  // createdAt: Date,
+  // updatedAt: Date,
   card_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Card'
   }
-})
+}, {timestamps: true})
 
 const Action = mongoose.model('Action', ActionSchema);
 

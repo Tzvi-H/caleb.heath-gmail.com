@@ -8,6 +8,19 @@ const { validationResult } = require("express-validator");
 2. create a new list in the database with all the required fields
 3. return the list in json format with a 201 status code
 */
+const addListToBoard = (req, res, next) => {
+  const list = req.list;
+  const boardId = req.body.boardId;
+  Board.findByIdAndUpdate(boardId, {
+    $addToSet: { lists: list._id }, // adds list to the lists array in board
+  }).then(() => {
+    next();
+  });
+};
+
+const sendList = (req, res, next) => {
+  res.json(req.list)
+}
 
 const createList = (req, res, next) => {
   const errors = validationResult(req);
@@ -18,17 +31,31 @@ const createList = (req, res, next) => {
           return res.status(404).json({
             message: "board id is doesn't exist"
           })
-          
-          const newList = {
-            "title": req.body.list.title,
-            "boardId": req.body.boardId,
-            "createdAt": new Date(),
-            "updatedAt": "2020-10-06T23:40:26.606Z",
-            "position": 65535.0
-          }
-          List.create()
+        } 
+        
+        const newList = {
+          title: req.body.list.title,
+          boardId: req.body.boardId,
+          //position,
         }
-        res.json(board)
+        List.create(newList).then(list => {
+          req.list = list
+          next()
+        }).catch(e => console.log(e))
+      
+        
+        
+/*
+
+const addCardToList = (req, res, next) => {
+  const card = req.card;
+  const listId = req.list._id;
+  List.findByIdAndUpdate(listId, {
+    $addToSet: { cards: card._id },
+  }).then(() => next());
+};
+*/
+        //res.json(board)
       })
       .catch(e => {
         console.log(e)
@@ -36,18 +63,13 @@ const createList = (req, res, next) => {
           message: "board id is invalid"
         })
       })
-    // Board.create(req.body.board)
-    //   .then((board) => {
-    //     Board.find({ _id: board._id }, "title _id createdAt updatedAt").then(
-    //       (board) => res.json({ board })
-    //     );
-    //   })
-    //   .catch((err) =>
-    //     next(new HttpError("Creating board failed, please try again", 500))
-    //   );
+
   } else {
     return next(new HttpError("The input field is empty.", 422));
   }
 };
 
 exports.createList = createList;
+
+exports.sendList = sendList;
+exports.addListToBoard = addListToBoard;

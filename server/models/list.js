@@ -10,8 +10,8 @@ const ListSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Board'
   },
-  createdAt: Date,
-  updatedAt: Date,
+  // createdAt: Date,
+  // updatedAt: Date,
   position: Number,
   cards: [
     {
@@ -19,7 +19,7 @@ const ListSchema = new Schema({
       ref: 'Card'
     }
   ]
-})
+}, {timestamps: true})
 
 const List = mongoose.model('List', ListSchema);
 

@@ -41,6 +41,7 @@ const createBoard = (req, res, next) => {
   if (errors.isEmpty()) {
     Board.create(req.body.board)
       .then((board) => {
+        // why search for board when response seems to have everything we want?
         Board.find({ _id: board._id }, "title _id createdAt updatedAt").then(
           (board) => res.json({ board })
         );
