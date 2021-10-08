@@ -3,18 +3,18 @@ POST http://localhost:5000/api/lists/ HTTP/1.1
 content-type: application/json
 
 {
-  "boardId": "615b2c8b16da3c988bc0ab1a",
+  "boardId": "615b2c8b16da3c988bc0ab1f",
   "list": {
-    "title": "My list 2"
+    "title": "My list 10"
   }
 }
 
 ### Updates a list
-PUT http://localhost:5000/api/lists/1 HTTP/1.1
+PUT http://localhost:5000/api/lists/61608bdd1e6882b0bb9ed70a HTTP/1.1
 content-type: application/json
 
-{
-  "title": "Updated title",
-  "position": 137882
+{ 
+  "title": "its friday 1:19",
+  "position": 4
 }
 
