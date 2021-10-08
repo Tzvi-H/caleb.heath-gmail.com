@@ -3,7 +3,7 @@ POST http://localhost:5000/api/lists/ HTTP/1.1
 content-type: application/json
 
 {
-  "boardId": "615b2c8b16da3c988bc0ab1f",
+  "boardId": "615b2c8b16da3c988bc0ab1a",
   "list": {
     "title": "My list 2"
   }
