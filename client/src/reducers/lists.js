@@ -9,6 +9,11 @@ export default function boards(state = [], action) {
         return listWithoutCards
       })
     }
+    case types.CREATE_LIST_SUCCESS: {
+      const { _id, boardId, title } = action.list
+      const newList = { _id, boardId, title }
+      return state.concat(newList)
+    }
     default:
       return state;
   }

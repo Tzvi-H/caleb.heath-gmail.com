@@ -13,11 +13,10 @@ export function createList(list, callback) {
   return function(dispatch) {
     dispatch(createListRequest());
     apiClient.createList(list, data => {
-      dispatch(createListSuccess(data.list));
+      dispatch(createListSuccess(data));
 
       if (callback) {
         callback();
-        //callback(data.list);
       }
     });
   };
