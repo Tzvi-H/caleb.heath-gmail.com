@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../actions/BoardActions";
 
 import ExistingLists from "./ExistingLists";
-import List from "./List"
+import AddList from "./AddList";
 
 const Board = props => {
   const dispatch = useDispatch();
@@ -34,6 +34,7 @@ const Board = props => {
       <main>
         <div id="list-container" className="list-container">
           <ExistingLists boardId={id} />
+          <AddList />
         </div>
       </main>
     </>
