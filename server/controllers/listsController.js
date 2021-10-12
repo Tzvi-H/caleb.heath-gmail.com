@@ -2,16 +2,7 @@ const Board = require("../models/board");
 const List = require("../models/list");
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
-/*
 
-const addCardToList = (req, res, next) => {
-  const card = req.card;
-  const listId = req.list._id;
-  List.findByIdAndUpdate(listId, {
-    $addToSet: { cards: card._id },
-  }).then(() => next());
-};
-*/
 const addListToBoard = (req, res, next) => {
   const list = req.list;
   const boardId = req.body.boardId;

@@ -1,2 +1,14 @@
 ### GET request for a card
 GET http://localhost:5000/api/cards/615c8ea9a51d9bfd67175935 HTTP/1.1
+
+
+### Create a card
+POST http://localhost:5000/api/cards/ HTTP/1.1
+content-type: application/json
+
+{
+  "listId": "615c8a06a51d9bfd67175934",
+  "card": {
+    "title": "card 1:32"
+  }
+}
