@@ -1,0 +1,2 @@
+### GET request for a card
+GET http://localhost:5000/api/cards/615c8ea9a51d9bfd67175935 HTTP/1.1
