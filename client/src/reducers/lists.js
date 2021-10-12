@@ -14,6 +14,11 @@ export default function boards(state = [], action) {
       const newList = { _id, boardId, title }
       return state.concat(newList)
     }
+    case types.UPDATE_LIST_SUCCESS: {
+      return state.map(list => {
+        return list._id === action.list._id ? action.list : list
+      })
+    }
     default:
       return state;
   }

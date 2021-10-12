@@ -1,12 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
-import * as actions from "../../actions/BoardActions";
+import * as actions from "../../actions/ListActions";
 
 import Card from "./Card";
 
 const List = ({id, title}) => {
+  const dispatch = useDispatch();
+
+  const [ newTitle, setNewTitle ] = useState(title)
+  const [ isInputVisible, setIsInputVisible ] = useState(false)
+
   const cards = useSelector(store => store.cards).filter(({listId}) => id === listId)
+
+  const handleInput = e => setNewTitle(e.target.value)
+  const handleClickP = e => setIsInputVisible(true)
+
+  const handleBlur = e => {
+    setIsInputVisible(false)
+
+    if (newTitle.trim() === "") {
+      return
+    }
+
+    const updatedListProperties = {
+      title: newTitle
+    }
+    dispatch(actions.updateList(id, updatedListProperties)) 
+  }
+
+
 
   return (
     <div className="list-wrapper">
@@ -14,7 +37,20 @@ const List = ({id, title}) => {
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
           <div>
-            <p className="list-title">{title}</p>
+            {
+              isInputVisible ? 
+              <input
+                type="text"
+                className="list-title"
+                value={newTitle}
+                autoFocus={true}
+                onChange={handleInput}
+                onBlur={handleBlur}
+                // onKeyDown={e => console.log(e)}
+              /> 
+              :
+              <p className="list-title" onClick={handleClickP}>{title}</p>
+            }
           </div>
           <div className="add-dropdown add-top">
             <div className="card"></div>
