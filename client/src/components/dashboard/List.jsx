@@ -11,6 +11,7 @@ const List = ({id, title}) => {
 
   const [ newTitle, setNewTitle ] = useState(title)
   const [ isInputVisible, setIsInputVisible ] = useState(false)
+  const [ addCardVisible, setAddCardVisible ] = useState(false)
   
   const cards = useSelector(store => store.cards).filter(({listId}) => id === listId)
 
@@ -41,7 +42,7 @@ const List = ({id, title}) => {
   // when i click the X icon for 'add-dropdown add-bottom', remove the classes
 
   return (
-    <div className="list-wrapper add-dropdown-active">
+    <div className={`list-wrapper ${addCardVisible ? 'add-dropdown-active' : ''}`}>
       <div className="list-background">
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
@@ -80,7 +81,7 @@ const List = ({id, title}) => {
             ) 
           }
           </div>
-          <AddCard listId={id}/>
+          <AddCard listId={id} setAddCardVisible={setAddCardVisible} addCardVisible={addCardVisible}/>
         </div>
       </div>
     </div>

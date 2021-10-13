@@ -4,22 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../actions/CardActions";
 
 
-const AddCard = ({listId}) => {
+const AddCard = ({listId, setAddCardVisible, addCardVisible}) => {
   const dispatch = useDispatch();
 
   const [ newTitle, setNewTitle ] = useState("")
 
-
   const handleTextAreaChange = e => setNewTitle(e.target.value)
   
-  /*
-   if newtitle is an empty string
-     return
-
-    dispact a createCard action   
-      createCard action want cardTitle, listId
-
-  */
   const handleAddCard = e => {
     if (newTitle.trim() === "") {
       return
@@ -32,9 +23,17 @@ const AddCard = ({listId}) => {
       }
     }
 
-    dispatch(actions.createCard(newCard))
+    dispatch(actions.createCard(newCard, handleClearAddCard))
   }
 
+  const handleAddCardToggle = (e) => {
+    setAddCardVisible(true)
+  }
+
+  const handleClearAddCard = (e) => {
+    setNewTitle("")
+    setAddCardVisible(false)
+  }
   // when adding a card (when i click elem with add-card-toggle)
   // i want to make an elem with add-dropdown visible, and hide add-card-toggle
   //
@@ -47,19 +46,19 @@ const AddCard = ({listId}) => {
     /* class: active-card when visible, remove when invisible */
   return (
     <>
-      <div className="add-dropdown add-bottom active-card">
+      <div className={`add-dropdown add-bottom ${ addCardVisible ? 'active-card' : ''}`}>
         <div className="card">
           <div className="card-info"></div>
           <textarea name="add-card" onChange={handleTextAreaChange} value={newTitle}></textarea>
           <div className="members"></div>
         </div>
         <a className="button" onClick={handleAddCard}>Add</a>
-        <i className="x-icon icon"></i>
+        <i className="x-icon icon" onClick={handleClearAddCard}></i>
         <div className="add-options">
           <span>...</span>
         </div>
       </div>
-      <div className="add-card-toggle" data-position="bottom">
+      <div className="add-card-toggle" data-position="bottom" onClick={handleAddCardToggle}>
         Add a card...
       </div>
     </>
