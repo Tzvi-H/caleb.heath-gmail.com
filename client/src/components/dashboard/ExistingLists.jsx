@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../actions/BoardActions";
 
 import List from "./List"
-
+/*
+state activeList = null or listId
+handleAddCardClick(listId)
+*/
 const ExistingLists = props => {
   const dispatch = useDispatch();
   const id = useParams().id
