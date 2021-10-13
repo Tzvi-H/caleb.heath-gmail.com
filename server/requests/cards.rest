@@ -7,8 +7,8 @@ POST http://localhost:5000/api/cards/ HTTP/1.1
 content-type: application/json
 
 {
-  "listId": "615c8a06a51d9bfd67175934",
+  "listId": "6166fcd91dbdc694fc7ea8b1",
   "card": {
-    "title": "card 1:32"
+    "title": "card 11:38"
   }
 }

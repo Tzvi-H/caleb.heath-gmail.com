@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../actions/BoardActions";
 
-const Card = ({id, text}) => {
+const Card = ({id, title}) => {
 
   return (
     <div className="card-background">
@@ -16,7 +16,7 @@ const Card = ({id, text}) => {
           <div className="card-label orange colorblindable"></div>
           <div className="card-label blue colorblindable"></div>
           <div className="card-label purple colorblindable"></div> */}
-          <p>{text}</p>
+          <p>{title}</p>
         </div>
         <div className="card-icons">
           {/* <i className="clock-icon sm-icon overdue-recent completed">
