@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom"
+import { useParams, useRouteMatch } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../actions/BoardActions";
 
@@ -7,9 +7,21 @@ import ExistingLists from "./ExistingLists";
 import AddList from "./AddList";
 
 const Board = props => {
-  const dispatch = useDispatch();
-  const id = useParams().id
+  const match = useRouteMatch('/boards/:id')
+  let id;
 
+  if (match) {
+    id = useParams().id
+  } else {
+    const cardId = useParams().id
+    const card = useSelector(store => {
+      return store.cards.find(card => card._id === cardId)
+    })
+    console.log('CARD', card)
+  }
+
+  const dispatch = useDispatch();
+  
   const board = useSelector(store => store.boards).filter(({_id}) => _id === id)[0]
 
   useEffect(() => {
