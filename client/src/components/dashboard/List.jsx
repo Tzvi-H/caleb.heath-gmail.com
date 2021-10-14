@@ -6,13 +6,12 @@ import * as actions from "../../actions/ListActions";
 import Card from "./Card";
 import AddCard from "./AddCard";
 
-const List = ({id, title}) => {
+const List = ({id, title, clearAddCard, showAddCard, isActiveList}) => {
   const dispatch = useDispatch();
 
   const [ newTitle, setNewTitle ] = useState(title)
   const [ isInputVisible, setIsInputVisible ] = useState(false)
-  const [ addCardVisible, setAddCardVisible ] = useState(false)
-  
+    
   const cards = useSelector(store => store.cards).filter(({listId}) => id === listId)
 
   const handleInput = e => setNewTitle(e.target.value)
@@ -42,7 +41,7 @@ const List = ({id, title}) => {
   // when i click the X icon for 'add-dropdown add-bottom', remove the classes
 
   return (
-    <div className={`list-wrapper ${addCardVisible ? 'add-dropdown-active' : ''}`}>
+    <div className={`list-wrapper ${isActiveList ? 'add-dropdown-active' : ''}`}>
       <div className="list-background">
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
@@ -81,7 +80,7 @@ const List = ({id, title}) => {
             ) 
           }
           </div>
-          <AddCard listId={id} setAddCardVisible={setAddCardVisible} addCardVisible={addCardVisible}/>
+          <AddCard listId={id} showAddCard={showAddCard} clearAddCard={clearAddCard} isActiveList={isActiveList}/>
         </div>
       </div>
     </div>
