@@ -1,5 +1,22 @@
-import React from "react";
-const Card = () => {
+import React, { useEffect } from "react";
+import { useParams, useRouteMatch } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../../actions/CardActions"
+
+const CardModal = () => {
+  const dispatch = useDispatch();
+
+  const cardId = useParams().id
+  const card = useSelector(store => store.cards).filter(({_id}) => _id === cardId)[0]
+
+  useEffect(() => {
+    dispatch(actions.fetchCard(cardId));
+  }, [dispatch])
+
+  if (!card) {
+    return null
+  }
+
   return (
     <div id="modal-container">
       <div className="screen"></div>
@@ -165,8 +182,7 @@ const Card = () => {
                   </small>
                   <div className="comment">
                     <label>
-                      <textarea required="" rows="1">
-                        Example of a comment.
+                      <textarea required="" rows="1" value="">
                       </textarea>
                       <div>
                         <a className="light-button card-icon sm-icon"></a>
@@ -234,4 +250,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default CardModal;

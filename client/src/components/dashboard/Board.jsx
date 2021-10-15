@@ -8,26 +8,38 @@ import AddList from "./AddList";
 
 const Board = props => {
   const match = useRouteMatch('/boards/:id')
-  let id;
+  let boardId;
+  const id = useParams().id
 
+  const cards = useSelector(store => {
+    return store.cards
+  })
+ 
   if (match) {
-    id = useParams().id
+    boardId = id 
   } else {
-    const cardId = useParams().id
-    const card = useSelector(store => {
-      return store.cards.find(card => card._id === cardId)
-    })
-    console.log('CARD', card)
+    const cardId = id
+    const card = cards.find(card => card._id === cardId)
+    
+    if (card) {
+      boardId = card.boardId
+    }
   }
 
   const dispatch = useDispatch();
   
-  const board = useSelector(store => store.boards).filter(({_id}) => _id === id)[0]
+  const board = useSelector(store => store.boards).filter(({_id}) => _id === boardId)[0]
 
   useEffect(() => {
-    dispatch(actions.fetchBoard(id));
-  }, [dispatch]);
+    if (boardId) {
+      dispatch(actions.fetchBoard(boardId));
+    }
+  }, [boardId]);
  
+  if (!board) {
+    return null
+  }
+
   return (
     <>
       <header>
@@ -45,7 +57,7 @@ const Board = props => {
       </header>
       <main>
         <div id="list-container" className="list-container">
-          <ExistingLists boardId={id} />
+          <ExistingLists boardId={boardId} />
           <AddList />
         </div>
       </main>

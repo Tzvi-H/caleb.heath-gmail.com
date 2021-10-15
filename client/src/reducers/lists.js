@@ -3,6 +3,9 @@ import * as types from "../constants/ActionTypes";
 export default function boards(state = [], action) {
   switch (action.type) {
     case types.FETCH_BOARD_SUCCESS: {
+      if (!action.board) {
+        return state
+      }
       const { lists } = action.board
       return lists.map(list => {
         const { cards, ...listWithoutCards } = list
